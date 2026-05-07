@@ -1,0 +1,15 @@
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/EtudiantBackendApplication.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/configuration/AppConfig.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/configuration/logging/RequestLoggingFilterConfig.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/configuration/security/CustomUserDetailService.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/configuration/security/SpringSecurityConfig.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/controller/UserController.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/dto/LoginRequestDTO.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/dto/RegisterDTO.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/entities/User.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/handler/ErrorDetails.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/handler/RestExceptionHandler.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/mapper/UserDtoMapper.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/repository/UserRepository.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/service/JwtService.java
+/Users/nicolasbodelle/Projects/OpenClassRoom_devOps/projet 2/Back-end---Testez-et-am-liorez-une-application-existante/src/main/java/com/openclassrooms/etudiant/service/UserService.java

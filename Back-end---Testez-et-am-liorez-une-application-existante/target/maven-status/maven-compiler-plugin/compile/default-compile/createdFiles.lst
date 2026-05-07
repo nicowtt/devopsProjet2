@@ -1,0 +1,16 @@
+com/openclassrooms/etudiant/dto/RegisterDTO.class
+com/openclassrooms/etudiant/repository/UserRepository.class
+com/openclassrooms/etudiant/mapper/UserDtoMapperImpl.class
+com/openclassrooms/etudiant/EtudiantBackendApplication.class
+com/openclassrooms/etudiant/configuration/logging/RequestLoggingFilterConfig.class
+com/openclassrooms/etudiant/handler/ErrorDetails.class
+com/openclassrooms/etudiant/service/JwtService.class
+com/openclassrooms/etudiant/handler/RestExceptionHandler.class
+com/openclassrooms/etudiant/mapper/UserDtoMapper.class
+com/openclassrooms/etudiant/controller/UserController.class
+com/openclassrooms/etudiant/configuration/security/SpringSecurityConfig.class
+com/openclassrooms/etudiant/entities/User.class
+com/openclassrooms/etudiant/configuration/security/CustomUserDetailService.class
+com/openclassrooms/etudiant/configuration/AppConfig.class
+com/openclassrooms/etudiant/service/UserService.class
+com/openclassrooms/etudiant/dto/LoginRequestDTO.class
