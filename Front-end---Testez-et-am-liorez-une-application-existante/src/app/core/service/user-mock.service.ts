@@ -1,10 +1,10 @@
-import {Register} from '../models/Register';
+import {RegisterDTO} from '../models/register.model';
 import {Observable, of} from 'rxjs';
 
 
 export class UserMockService {
 
-  register(user: Register): Observable<Object> {
+  register(user: RegisterDTO): Observable<Object> {
     return of();
   }
 }

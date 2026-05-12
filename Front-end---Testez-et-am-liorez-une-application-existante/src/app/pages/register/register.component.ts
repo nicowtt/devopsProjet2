@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
-import { Register } from '../../core/models/Register';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RegisterDTO } from '../../core/models/register.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,7 @@ export class RegisterComponent implements OnInit {
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
   registerForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
 
@@ -40,7 +43,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const registerUser: Register = {
+    const registerUser: RegisterDTO = {
       firstName: this.registerForm.get('firstName')?.value,
       lastName: this.registerForm.get('lastName')?.value,
       login: this.registerForm.get('login')?.value,
@@ -51,9 +54,13 @@ export class RegisterComponent implements OnInit {
       .subscribe(
       () => {
         alert('SUCCESS!! :-)');
-        // TODO : router l'utilisateur vers la page de login
+        this.router.navigate(['/login']);
       },
     );
+  }
+
+  onSignIn(): void {
+    this.router.navigate(['/login']);
   }
 
   onReset(): void {
