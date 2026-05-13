@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
 import { UserService } from '../../core/service/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +11,7 @@ import { delay } from 'rxjs';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -60,7 +60,9 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
           this.authService.saveToken(token);
           this.loginSuccess = true;
-          // this.router.navigate(['/home']);
+          setTimeout(() => {
+            this.router.navigate(['/students']);
+          }, 2000);
         },
         error: (err) => {
           this.isLoading = false;
