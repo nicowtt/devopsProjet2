@@ -2,7 +2,7 @@ package com.openclassrooms.etudiant.controller;
 
 import com.openclassrooms.etudiant.dto.LoginRequestDTO;
 import com.openclassrooms.etudiant.dto.RegisterDTO;
-import com.openclassrooms.etudiant.mapper.UserDtoMapper;
+import com.openclassrooms.etudiant.mapper.UserDTOMapper;
 import com.openclassrooms.etudiant.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-    private final UserDtoMapper userDtoMapper;
+    private final UserDTOMapper userDTOMapper;
 
     @PostMapping("/api/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO registerDTO) {
-        userService.register(userDtoMapper.toEntity(registerDTO));
+        userService.register(userDTOMapper.toEntity(registerDTO));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

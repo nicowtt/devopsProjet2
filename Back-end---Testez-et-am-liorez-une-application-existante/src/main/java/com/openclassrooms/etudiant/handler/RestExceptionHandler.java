@@ -1,5 +1,6 @@
 package com.openclassrooms.etudiant.handler;
 
+import com.openclassrooms.etudiant.exception.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         logError(runtimeException);
         return handleExceptionInternal(runtimeException, "Internal Server error", new HttpHeaders(),
                 HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+    @ExceptionHandler(value = {ResourceNotFoundException.class})
+    protected ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException,
+        WebRequest request) {
+        logError(resourceNotFoundException);
+        return handleExceptionInternal(resourceNotFoundException, getErrorDetails(resourceNotFoundException, request),
+            new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     private void logError(Exception exception) {
