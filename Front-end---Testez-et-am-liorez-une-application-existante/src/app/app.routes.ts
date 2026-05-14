@@ -3,6 +3,7 @@ import {RegisterComponent} from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { StudentDetailsComponent } from './pages/student-details/student-details.component';
+import { StudentUpdateComponent } from './pages/student-update/student-update.component';
 import { StudentCreateComponent } from './pages/student-create/student-create.component';
 import { authGuard } from './core/guards/auth.guard';
 
@@ -33,6 +34,11 @@ export const routes: Routes = [
   {
     path: 'student/:uuid',
     component: StudentDetailsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'student/:uuid/update',
+    component: StudentUpdateComponent,
     canActivate: [authGuard]
   }
 ];

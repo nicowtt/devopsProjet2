@@ -1,0 +1,94 @@
+<div class="card m-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Student Update</h5>
+    <button class="btn btn-secondary btn-sm" (click)="goBack()">Back to students</button>
+  </div>
+  <div class="card-body">
+
+    @if (isLoading) {
+      <div class="text-center py-3">
+        <mat-spinner diameter="40" color="primary"></mat-spinner>
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="alert alert-danger">{{ errorMessage }}</div>
+    }
+
+    @if (successMessage) {
+      <div class="alert alert-success">{{ successMessage }}</div>
+    }
+
+    @if (!isLoading && student) {
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>First Name</th>
+              <td>
+                <input type="text"
+                  formControlName="firstName"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && form['firstName'].errors }" />
+                @if (submitted && form['firstName'].errors?.['required']) {
+                  <div class="invalid-feedback">First name is required</div>
+                }
+              </td>
+            </tr>
+            <tr>
+              <th>Last Name</th>
+              <td>
+                <input type="text"
+                  formControlName="lastName"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && form['lastName'].errors }" />
+                @if (submitted && form['lastName'].errors?.['required']) {
+                  <div class="invalid-feedback">Last name is required</div>
+                }
+              </td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>
+                <input type="email"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && form['email'].errors }" />
+                @if (submitted && form['email'].errors) {
+                  <div class="invalid-feedback">
+                    @if (form['email'].errors?.['required']) {
+                      <div>Email is required</div>
+                    }
+                    @if (form['email'].errors?.['email']) {
+                      <div>Invalid email format</div>
+                    }
+                  </div>
+                }
+              </td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td>{{ student.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+            </tr>
+            <tr>
+              <th>Updated At</th>
+              <td>{{ student.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="text-center">
+          <button class="btn btn-primary" [disabled]="isSaving">
+            @if (isSaving) {
+              <mat-spinner diameter="20" color="accent"></mat-spinner>
+            } @else {
+              Save
+            }
+          </button>
+        </div>
+
+      </form>
+    }
+
+  </div>
+</div>
