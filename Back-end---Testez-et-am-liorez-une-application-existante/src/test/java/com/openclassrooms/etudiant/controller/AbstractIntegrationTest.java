@@ -9,15 +9,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 public class AbstractIntegrationTest {
 
-    @Container
-    static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.33");
+    static MySQLContainer<?> mySQLContainer;
 
     static {
-        mySQLContainer.start();
+        mySQLContainer = new MySQLContainer<>("mysql:8.0.33")
+            .withDatabaseName("testdb")
+            .withUsername("test")
+            .withPassword("test");
+        mySQLContainer.start(); // démarre une seule fois pour tous les tests
     }
 
     @DynamicPropertySource
