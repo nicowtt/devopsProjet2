@@ -242,7 +242,7 @@ public class StudentServiceTest {
     }
 
     // REMOVE STUDENT TEST
-    
+
     @Test
     public void test_delete_null_studentUuid_throws_IllegalArgumentException() {
         // GIVEN
