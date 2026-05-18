@@ -4,16 +4,14 @@ import com.openclassrooms.etudiant.dto.StudentDTO;
 import com.openclassrooms.etudiant.dto.StudentListDTO;
 import com.openclassrooms.etudiant.entities.Student;
 import com.openclassrooms.etudiant.exception.ResourceNotFoundException;
-import com.openclassrooms.etudiant.handler.RestExceptionHandler;
 import com.openclassrooms.etudiant.mapper.StudentDTOMapper;
 import com.openclassrooms.etudiant.mapper.StudentListDTOMapper;
 import com.openclassrooms.etudiant.repository.StudentRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +26,8 @@ public class StudentService {
     private final StudentListDTOMapper studentListDTOMapper;
     private final StudentDTOMapper studentDTOMapper;
 
-    public Student create(@NotNull Student student) {
+    public Student create(Student student) {
+        Assert.notNull(student, "Student must not be null");
         log.info("Create new Student");
 
         Optional<Student> optionalStudent = studentRepository.findByEmail(student.getEmail());
@@ -41,18 +40,22 @@ public class StudentService {
     }
 
     public Student update(
-        @NotNull Student student,
-        @NotNull UUID uuid
+        Student student,
+        UUID uuid
     ) {
+        Assert.notNull(student, "Student must not be null");
+        Assert.notNull(uuid, "Uuid must not be null");
         // check if student exist
         Student studentBdd = studentRepository.findByUuid(uuid)
             .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
 
         // check if email already exist
         Optional<Student> optionalStudent = studentRepository.findByEmail(student.getEmail());
-        if (optionalStudent.isPresent() && !optionalStudent.get().getUuid().equals(uuid)) {
-            throw new IllegalArgumentException("Email already in use");
-        }
+        optionalStudent.ifPresent(existing -> {
+            if (!existing.getUuid().equals(uuid)) {
+                throw new IllegalArgumentException("Email already in use");
+            }
+        });
 
         // update
         studentBdd.setFirstName(student.getFirstName());
@@ -70,13 +73,15 @@ public class StudentService {
             .toList();
     }
 
-    public StudentDTO student(@NotNull UUID studentUuid) {
+    public StudentDTO student(UUID studentUuid) {
+        Assert.notNull(studentUuid, "StudentUuid must not be null");
         Student student = studentRepository.findByUuid(studentUuid)
             .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return studentDTOMapper.toDTO(student);
     }
 
-    public void delete(@NotNull UUID studentUuid) {
+    public void delete(UUID studentUuid) {
+        Assert.notNull(studentUuid, "StudentUuid must not be null");
         Student student = studentRepository.findByUuid(studentUuid)
             .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
 

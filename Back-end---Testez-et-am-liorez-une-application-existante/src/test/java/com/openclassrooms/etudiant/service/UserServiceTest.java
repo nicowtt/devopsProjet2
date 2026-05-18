@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -24,10 +25,13 @@ public class UserServiceTest {
     private static final String LAST_NAME = "Doe";
     private static final String LOGIN = "LOGIN";
     private static final String PASSWORD = "PASSWORD";
+
     @Mock
     private UserRepository userRepository;
     @Mock
     private PasswordEncoder passwordEncoder;
+    @Mock
+    private JwtService jwtService;
     @InjectMocks
     private UserService userService;
 
@@ -74,5 +78,36 @@ public class UserServiceTest {
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(userCaptor.capture());
         assertThat(userCaptor.getValue()).isEqualTo(user);
+    }
+
+    @Test
+    public void test_login_user() {
+        // GIVEN
+        User user = new User();
+        user.setLogin(LOGIN);
+        user.setPassword(PASSWORD);
+        when(userRepository.findByLogin(any())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(any(), any())).thenReturn(true);
+        when(jwtService.generateToken(user)).thenReturn("OK");
+
+        // WHEN
+        String result = userService.login(LOGIN, PASSWORD);
+
+        // THEN
+        assertThat(result).isEqualTo("OK");
+    }
+
+    @Test
+    public void test_login_with_bad_password_throws_BadCredentialsException() {
+        // GIVEN
+        User user = new User();
+        user.setLogin(LOGIN);
+        user.setPassword(PASSWORD);
+        when(userRepository.findByLogin(any())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(any(), any())).thenReturn(false);
+
+        // THEN
+        Assertions.assertThrows(BadCredentialsException.class,
+            () -> userService.login(LOGIN, PASSWORD));
     }
 }
