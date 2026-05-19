@@ -17,23 +17,23 @@ export class StudentService {
     });
   }
 
-  getStudents(): Observable<StudentListDTO[]> {
-    return this.httpClient.get<StudentListDTO[]>('/api/getStudentList', { headers: this.getHeaders() });
+  createStudent(student: StudentSaveDTO): Observable<StudentDTO> {
+    return this.httpClient.post<StudentDTO>('/api/createStudent', student, { headers: this.getHeaders() });
+  }
+
+  updateStudent(uuid: string, student: StudentSaveDTO): Observable<StudentDTO> {
+    return this.httpClient.put<StudentDTO>(`/api/updateStudent/${uuid}`, student, { headers: this.getHeaders() });
   }
 
   getStudentByUuid(uuid: string): Observable<StudentDTO> {
     return this.httpClient.get<StudentDTO>(`/api/getStudent/${uuid}`, { headers: this.getHeaders() });
   }
 
-  createStudent(student: StudentSaveDTO): Observable<StudentDTO> {
-    return this.httpClient.post<StudentDTO>('/api/createStudent', student, { headers: this.getHeaders() });
+  getStudents(): Observable<StudentListDTO[]> {
+    return this.httpClient.get<StudentListDTO[]>('/api/getStudentList', { headers: this.getHeaders() });
   }
 
   deleteStudent(uuid: string): Observable<void> {
     return this.httpClient.delete<void>(`/api/deleteStudent/${uuid}`, { headers: this.getHeaders() });
-  }
-
-  updateStudent(uuid: string, student: StudentSaveDTO): Observable<StudentDTO> {
-    return this.httpClient.put<StudentDTO>(`/api/updateStudent/${uuid}`, student, { headers: this.getHeaders() });
   }
 }

@@ -10,6 +10,7 @@ src/*.d.ts
 
 # Angular
 **/.angular/*
+/coverage
 
 # nx
 **/.nx/*
